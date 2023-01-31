@@ -29,8 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   String message = "";
+  TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,23 +42,29 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             TextField(
-              onChanged: (String value)
-              {
-                setState(() {message = value;});
-                
-              }
-
-              
-            ),
+            TextField(
+              onChanged: (String value) {
+              setState(() {
+                message = value;
+              });
+            },
+            decoration: const InputDecoration(hintText: 'Skriv noget...'),),
             Text(
               'You wrote: $message',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            TextField(
+              controller: textController,
+            ),
+            Text('You wrote from Controller: san ${textController.text}'),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                child: Text('Tryk Her'))
           ],
         ),
       ),
-       
     );
   }
 }
